@@ -1,0 +1,86 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} Register {% endblock %}
+
+{% block body %}
+
+<br>
+<div class="container d-flex justify-content-center align-items-center min-vh-100 mb-4">
+    <div class="col-md-6 box-shadow p-5 bg-white rounded">
+        <div class="text-center mb-4">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/bs.png' %}" class="d-inline-block align-top img-fluid" alt="Brand Logo">
+            </a>
+        </div>
+        <h1 class="text-center mb-4 text-blue">Register</h1>
+
+
+        {% if messages %}
+        <div class="mt-4 d-flex justify-content-center" id="message_container">
+        
+          {% for message in messages %}
+        
+          {% if message.tags == "error" %}
+          <div class="alert bg-lightred" role="alert">
+        
+            <strong class="d-flex text-danger">  {{ message }} </strong>
+        
+          </div>
+        
+          {% elif message.tags == "success" %}
+        
+        
+          <div class="alert bg-lightgreen" role="alert">
+            <strong class="d-flex text-success"> {{ message }} </strong>
+        
+          </div>
+        
+        
+          {% endif %}
+        
+        
+        
+          {% endfor %}
+        
+        
+        </div>
+        {% endif %}
+        
+
+
+        <form method="POST" autocomplete="off">
+
+            {% csrf_token %}
+
+            {{RegisterForm|crispy}}
+
+            
+
+            <div class="d-grid mt-2">
+                <input class="btn btn-success" type="submit" value="Register" />
+            </div>
+            
+            
+        </form>
+
+
+        <br>
+
+        <p>Already have an account? if so then
+            <a class="text-blue" href="{% url 'my-login' %}"><b>Login</b></a>
+        </p>
+
+        <p>Back to admin
+            <a class="text-blue" href="/admin"><b>Admin</b></a>
+        </p>
+
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}
